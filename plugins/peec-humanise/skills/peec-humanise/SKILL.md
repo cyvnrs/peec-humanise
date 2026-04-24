@@ -29,7 +29,6 @@ Invoke when the user:
 
 - Peec AI MCP tools visible (`mcp__peec-ai__list_projects`, `mcp__peec-ai__list_prompts`, etc.)
 - `WebSearch` tool available — used to harvest real user phrasing
-- Python 3.12 on PATH (stdlib `curses` only — no extra deps)
 
 ## Important: Peec's prompt action model
 

@@ -47,14 +47,7 @@ The picker footer surfaces this warning so you see it before pressing enter.
 
 ## Install
 
-### Option 1: via plugin marketplace (recommended)
-
-```
-/plugin marketplace add cyvnrs/peec-humanise
-/plugin install peec-humanise@peec-humanise
-```
-
-### Option 2: via local marketplace (clone first)
+### via local marketplace (clone first)
 
 ```
 git clone https://github.com/cyvnrs/peec-humanise.git
@@ -62,7 +55,7 @@ git clone https://github.com/cyvnrs/peec-humanise.git
 /plugin install peec-humanise@peec-humanise
 ```
 
-### Option 3: project-local skill (no plugin system)
+### OR project-local skill (no plugin system)
 
 ```
 git clone https://github.com/cyvnrs/peec-humanise.git
@@ -79,55 +72,6 @@ Then type `/peec-humanise` while in that project.
 - Python 3.12 (stdlib `curses` only — no `pip install` needed)
 
 If the MCP is missing or not authed, the skill surfaces the install / auth instructions on the first run and stops.
-
-## Rule set (summary)
-
-Rewrites are governed by rules listed in full inside [`SKILL.md`](./plugins/peec-humanise/skills/peec-humanise/SKILL.md). The short version:
-
-- **Ban list**: `busy, modern, leading, comprehensive, robust, seamless, innovative, cutting-edge, top-rated, seeking, leveraging, utilize, streamline, optimize, navigate, facilitate, empower, unlock, elevate, enhance, solution, platform (generic), professional, stakeholder`.
-- **Framing collapse**: `"which platform offers the best X"` → `"best X"`; `"what are the top-rated X for Y"` → `"best X for Y"`; etc.
-- **Lowercase everything**; drop articles and most question marks; contractions without apostrophes (`dont`, `cant`, `ur`).
-- **Typos**: sparingly (~1 in 4 rewrites, max one per prompt): `teh`, `recomend`, `definately`, `seperate`, `realy`, `bcs`, `w/o`, `vs`.
-- **Length**: 2-6 words target; 12 hard cap.
-- **`reddit` suffix** on ~20% of rewrites when it fits (`crm for small biz reddit`).
-- **Preserve intent**, never narrow or broaden the topic.
-
-## Development
-
-This repo is structured as a marketplace with a single plugin:
-
-```
-peec-humanise/
-├── .claude-plugin/
-│   └── marketplace.json        # marketplace listing
-├── plugins/
-│   └── peec-humanise/          # the plugin itself
-│       ├── .claude-plugin/
-│       │   └── plugin.json     # plugin manifest
-│       ├── skills/
-│       │   └── peec-humanise/
-│       │       ├── SKILL.md    # the skill playbook + rules
-│       │       └── scripts/
-│       │           └── picker.py   # curses TUI
-│       └── README.md
-├── README.md
-└── LICENSE
-```
-
-To iterate locally while developing, symlink the skill into a project's `.claude/skills/`:
-
-```
-ln -s $(pwd)/plugins/peec-humanise/skills/peec-humanise /path/to/project/.claude/skills/peec-humanise
-```
-
-Changes to `SKILL.md` or `picker.py` take effect on the next invocation — no reinstall needed.
-
-## Uninstall
-
-```
-/plugin uninstall peec-humanise@peec-humanise
-/plugin marketplace remove peec-humanise
-```
 
 ## License
 

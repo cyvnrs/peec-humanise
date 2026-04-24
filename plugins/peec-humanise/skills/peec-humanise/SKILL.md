@@ -125,36 +125,6 @@ Create `/tmp/peec-humanise-<project_id>-<timestamp>.json` with this shape:
 
 Skip items where `after == "UNCHANGED"`.
 
-### Step 7 — launch the interactive picker
-
-Run the picker that lives at `scripts/picker.py` next to this `SKILL.md`. Resolve the path based on where the skill was loaded from:
-
-- **Project-local dev install:** `.claude/skills/peec-humanise/scripts/picker.py`
-- **Plugin install (via `/plugin install`):** `~/.claude/plugins/cache/<marketplace>/peec-humanise/<version>/skills/peec-humanise/scripts/picker.py`
-
-If unsure, locate it dynamically:
-
-```bash
-PICKER="$(find ~/.claude/plugins .claude/skills -path '*peec-humanise/scripts/picker.py' 2>/dev/null | head -1)"
-python3 "$PICKER" \
-    /tmp/peec-humanise-<id>-<ts>.json \
-    /tmp/peec-humanise-<id>-<ts>.selected.json
-```
-
-The picker is a curses TUI:
-- Up/Down arrows: move between rewrite rows.
-- `y`: accept the primary rewrite for the highlighted row, advance to next.
-- `a`: accept the alternate rewrite instead.
-- `n`: reject the rewrite (keep old prompt as-is), advance.
-- `tab`: toggle between `after` and `alt` previews.
-- `q` or `Esc`: quit without submitting.
-- Navigate past the last row to reach the `[ submit accepted to peec ]` row.
-- `Enter` on the submit row: the picker writes the selected JSON and exits 0.
-
-The footer shows the delete+create warning.
-
-If curses fails (no TTY, e.g. in a non-interactive harness), the script falls back to a numbered print and a stdin prompt — the skill should note this and prompt the user for comma-separated row numbers to accept.
-
 ### Step 8 — push accepted rewrites to Peec
 
 Read `/tmp/peec-humanise-*.selected.json`. For each accepted item, the payload is:

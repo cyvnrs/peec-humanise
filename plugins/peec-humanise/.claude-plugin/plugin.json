@@ -1,0 +1,10 @@
+{
+  "name": "peec-humanise",
+  "description": "Rewrite Peec AI tracked prompts to match how real people actually type searches. Grounds rewrites in language harvested from Reddit, HN, Quora, and X for each tracked topic. Presents an interactive curses picker (arrow keys, y/n/a, enter to submit). Respects Peec's delete+create action model.",
+  "version": "0.1.0",
+  "author": {
+    "name": "cyvnrs"
+  },
+  "homepage": "https://github.com/cyvnrs/peec-humanise",
+  "category": "productivity"
+}
